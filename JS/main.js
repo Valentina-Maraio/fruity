@@ -1,14 +1,32 @@
-console.log("sono in console")
+fetch('https://rickandmortyapi.com/api/character/')
+.then(res => res.json())
+.then(characters => showCharacters(characters.results));
 
-const api = 'https://www.fruityvice.com/api/fruit/all';
+fetch('https://rickandmortyapi.com/api/character/')
+.then(res => res.json())
+.then(characters => characterStatus(characters.results));
 
-function fruitCall(){
+showCharacters = characters => { 
+    const charactersDiv = document.querySelector('#ram'); 
+    characters.forEach(character => {
+        const characterElement = document.createElement('p');
+        characterElement.innerText = `Character Name: ${character.name}`;
+        charactersDiv.append(characterElement);
 
-    let apiRes = 'http://www.fruityvice.com/api/fruit/all'
-
-    fetch(apiRes)
-    .then(res => res.json())
-    .then(a => {
-        console.log(a)
-    })
+        //buttons
+        const characterButton = document.createElement('button');
+        characterButton.innerHTML = 'Click';
+        charactersDiv.append(characterButton);
+    });
 }
+
+characterStatus = characters => { 
+    const charactersDiv = document.querySelector('#ram'); 
+    characters.forEach(character => {
+        //buttons
+        const characterButton = document.createElement('button');
+        characterButton.innerHTML = onclick(`${character.characterStatus}`)
+        charactersDiv.append(characterButton);
+    });
+}
+
