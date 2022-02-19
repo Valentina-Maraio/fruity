@@ -2,10 +2,6 @@ fetch('https://rickandmortyapi.com/api/character/')
 .then(res => res.json())
 .then(characters => showCharacters(characters.results));
 
-fetch('https://rickandmortyapi.com/api/character/')
-.then(res => res.json())
-.then(characters => characterStatus(characters.results));
-
 showCharacters = characters => { 
     const charactersDiv = document.querySelector('#ram'); 
     characters.forEach(character => {
@@ -17,16 +13,16 @@ showCharacters = characters => {
         const characterButton = document.createElement('button');
         characterButton.innerHTML = 'Click';
         charactersDiv.append(characterButton);
-    });
-}
 
-characterStatus = characters => { 
-    const charactersDiv = document.querySelector('#ram'); 
-    characters.forEach(character => {
-        //buttons
-        const characterButton = document.createElement('button');
-        characterButton.innerHTML = onclick(`${character.characterStatus}`)
-        charactersDiv.append(characterButton);
+        characterButton.addEventListener('click', function() {
+            fetch('https://rickandmortyapi.com/api/location')
+            .then(function (result) {
+                console.log(result.location);
+            })
+            .catch(function (e) {
+                console.log(e);
+            });
+        });
     });
 }
 
