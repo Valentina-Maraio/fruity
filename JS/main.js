@@ -1,4 +1,4 @@
-fetch('https://rickandmortyapi.com/api/character/')
+/*fetch('https://rickandmortyapi.com/api/character/')
 .then(res => res.json())
 .then(characters => showCharacters(characters.results));
 
@@ -24,5 +24,17 @@ showCharacters = characters => {
             });
         });
     });
-}
+}*/
 
+fetch('https://www.fruityvice.com/api/fruit/all')
+.then(res => res.json())
+.then(fruits => showFruits(fruits.name));
+
+showFruit = fruits => {
+    const fruitsDiv = document.querySelector('#fruit');
+    fruits.forEach(fruit => {
+        const fruitElement = document.createElement('li');
+        fruitElement.innerHTML = `Fruit Names: ${fruit.name}`;
+        fruitsDiv.append(fruitElement);
+    })
+}
