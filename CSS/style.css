@@ -1,0 +1,22 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: orange;
+}
+
+.fruitBox{
+    border: 1px solid #fff;
+    width: 900px;
+    display: flex;
+    justify-content: center;
+}
+
+.grid-item {
+    border: 1px solid #fff;
+    width: 300px;
+    height: 300px;
+}
