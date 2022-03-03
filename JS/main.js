@@ -1,9 +1,14 @@
+function myFunction(){
+    document.getElementById('demo').innerHTML = "ciao";
+}
+
 axios({
     method: 'GET',
     url: 'https://www.fruityvice.com/api/fruit/all'
 }).then(res => {
     const fruitName = document.getElementById('name')
     const fruitFamily = document.getElementById('family')
+    const button = document.getElementById('button')
 
     const carbs = document.getElementById('carbs')
     const prot = document.getElementById('prot')
@@ -35,8 +40,11 @@ axios({
         const fruitSug = document.createElement('li')
         fruitSug.textContent = `Sugar: ${fruit.nutritions.sugar}`
 
+        const infoBTN = document.createElement('button')
+
         fragment.appendChild(fruitNameH2)
         fragment.appendChild(fruitFamilyH3)
+        fragment.appendChild(infoBTN)
         fragment.appendChild(fruitCarbs)
         fragment.appendChild(fruitProt)
         fragment.appendChild(fruitFat)
@@ -45,6 +53,7 @@ axios({
     }
     fruitName.appendChild(fragment)
     fruitFamily.appendChild(fragment)
+    button.appendChild(fragment)
     carbs.appendChild(fragment)
     prot.appendChild(fragment)
     fat.appendChild(fragment)
