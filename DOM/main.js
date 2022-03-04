@@ -23,15 +23,44 @@ function sayHi(){
 //}
 
 //more info about fruit
-function moreInfo(event){
-    const title = 
-    axios({
-        method: "GET",
-        url: 'https://www.fruityvice.com/api/fruit/apple'
-    })
-    .then(res => {
-        console.log(res)
-    })
+function moreInfo(data){
+    const infoBox = document.createElement('div')
+    infoBox.style.cssText = `width: 500px; height: 500px; display: none;`
+    document.body.appendChild(infoBox)
+
+    const infoSingleCard = document.createElement('div')
+    infoSingleCard.style.cssText = 
+            `color: black !important;
+            background-color: lightgreen;
+            width: 200px;
+            height: 180px;
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            
+            justify-content: center
+            display: grid;
+            grid-gap: 2em;
+            margin: 10px;
+            border: 1px solid black;`
+    infoBox.appendChild(infoSingleCard)
+    
+
+    const carbs = document.createElement('li');
+    carbs.innerHTML = `Carbs: ${data.name}`
+    carbs.style.cssText = 
+        `color: black;`
+    infoSingleCard.appendChild(carbs);
+    
+    const prot = document.createElement('li')
+    prot.innerHTML = `Protein: ${data.protein}`
+    prot.style.cssText = 
+        `color: black;`
+    infoSingleCard.appendChild(prot);
+
+    /*const fat = document.createElement('fat')
+    const cal = document.createElement('cal')
+    const sugar = document.createElement('sugar')*/
 }
 
 //document.getElementsByTagName("body").style.display =
@@ -62,11 +91,11 @@ axios({
         const box = document.createElement('div');
         box.style.cssText =
             `color: black !important;
-            background-color: orange;
+            background-color: lightgreen;
             width: 200px;
-            height: 150px;
+            height: 180px;
             text-align: center;
-            border-radius: 20px;
+            border-radius: 10px;
             padding: 10px;
             
             justify-content: center
@@ -89,7 +118,11 @@ axios({
         const btn = document.createElement('button');
         btn.innerText = "INFO";
         btn.style.cssText = 
-            `background-color: pink;`
+            `background-color: orange;
+            width: 90px;
+            border-radius: 10px;`
+        btn.value = "moreInfo"
+        btn.id = "infoButton"
         btn.addEventListener('click', moreInfo);
         box.appendChild(btn)
     }
