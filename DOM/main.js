@@ -24,7 +24,14 @@ function sayHi(){
 
 //more info about fruit
 function moreInfo(event){
-    console.log("cliccami ancora")
+    const title = 
+    axios({
+        method: "GET",
+        url: 'https://www.fruityvice.com/api/fruit/apple'
+    })
+    .then(res => {
+        console.log(res)
+    })
 }
 
 //document.getElementsByTagName("body").style.display =
