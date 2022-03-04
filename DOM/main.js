@@ -43,25 +43,33 @@ axios({
     url: 'https://www.fruityvice.com/api/fruit/all'
 })
 .then(res => {
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 
+            `width: auto;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;`
+    document.body.appendChild(wrapper)
+    
     for (const fruit of res.data){
         const box = document.createElement('div');
         box.style.cssText =
-            `color: white !important;
+            `color: black !important;
             background-color: orange;
             width: 200px;
-            height: 210px;
+            height: 150px;
             text-align: center;
             border-radius: 20px;
             padding: 10px;
             
-            justify-content: space-around;
+            justify-content: center
             display: grid;
-            grid-gap: 1em;
-            margin: auto;
+            grid-gap: 2em;
+            margin: 10px;
             border: 1px solid black;`
-        document.body.appendChild(box);
+        wrapper.appendChild(box);
     
-        const title = document.createElement('h2');
+        const title = document.createElement('h3');
         title.textContent = `Name: ${fruit.name}`
         title.style.cssText = 
             `color: black;`
