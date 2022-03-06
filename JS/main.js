@@ -1,57 +1,111 @@
+//axios call
 axios({
-    method: 'GET',
+    method: "GET",
     url: 'https://www.fruityvice.com/api/fruit/all'
-}).then(res => {
-    const fruitName = document.getElementById('name')
-    const fruitFamily = document.getElementById('family')
-
-    const carbs = document.getElementById('carbs')
-    const prot = document.getElementById('prot')
-    const fat = document.getElementById('fat')
-    const cal = document.getElementById('cal')
-    const sugar = document.getElementById('sugar')
-
-    const fragment = document.createDocumentFragment()
-    for(const fruit of res.data) {
-        
-        const fruitNameH2 = document.createElement('h2')
-        fruitNameH2.textContent = `Name: ${fruit.name}`
-        
-        const fruitFamilyH3 = document.createElement('h3')
-        fruitFamilyH3.textContent = `Family: ${fruit.family}`
-
-        const fruitCarbs = document.createElement('li')
-        fruitCarbs.textContent = `Carbs: ${fruit.nutritions.carbohydrates}`
-
-        const fruitProt = document.createElement('li')
-        fruitProt.textContent = `Protein: ${fruit.nutritions.protein}`
-
-        const fruitFat = document.createElement('li')
-        fruitFat.textContent = `Fat: ${fruit.nutritions.fat}`
-
-        const fruitCal = document.createElement('li')
-        fruitCal.textContent = `Cal: ${fruit.nutritions.calories}`
-
-        const fruitSug = document.createElement('li')
-        fruitSug.textContent = `Sugar: ${fruit.nutritions.sugar}`
-
-
-        fragment.appendChild(fruitNameH2)
-        fragment.appendChild(fruitFamilyH3)
-        fragment.appendChild(fruitCarbs)
-        fragment.appendChild(fruitProt)
-        fragment.appendChild(fruitFat)
-        fragment.appendChild(fruitCal)
-        fragment.appendChild(fruitSug)
-    }
-    fruitName.appendChild(fragment)
-    fruitFamily.appendChild(fragment)
-    carbs.appendChild(fragment)
-    prot.appendChild(fragment)
-    fat.appendChild(fragment)
-    cal.appendChild(fragment)
-    sugar.appendChild(fragment)
 })
-.catch(error => console.log(error))
+.then(res => {
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 
+            `width: auto;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;`
+    document.body.appendChild(wrapper)
 
+    const searchBox = document.createElement('div');
+    searchBox.style.cssText = 
+        `width: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: absolute;
+        
+        margin-bottom: 50px;`
+    wrapper.appendChild(searchBox)
 
+    searchBar = document.createElement('input');
+    searchBar.innerHTML = "Search..."
+    searchBox.style.cssText = 
+            `color: black;`
+    searchBox.appendChild(searchBar)
+
+    searchBtn = document.createElement('button');
+    searchBtn.innerHTML = "GO"
+    searchBox.appendChild(searchBtn)
+
+    for (const fruit of res.data){
+        const box = document.createElement('div');
+        box.style.cssText =
+            `color: black !important;
+            background-color: lightgreen;
+            width: 200px;
+            height: 300px;
+            text-align: center;
+            border-radius: 10px;
+            padding: 10px;
+            
+            justify-content: center
+            display: grid;
+            grid-gap: 2em;
+            margin: 10px;
+            border: 1px solid black;`
+        wrapper.appendChild(box);
+    
+        const title = document.createElement('h3');
+        title.textContent = `Name: ${fruit.name}`
+        title.style.cssText = 
+            `color: black;`
+        box.appendChild(title);
+    
+        const family = document.createElement('h5');
+        family.textContent = `Family: ${fruit.family}`
+        box.appendChild(family);
+
+        //info button
+        const btn = document.createElement('button');
+        btn.innerText = "INFO";
+        btn.style.cssText = 
+            `background-color: orange;
+            width: 90px;
+            border-radius: 10px;`
+        btn.value = "moreInfo"
+        btn.id = "infoButton"
+
+        btn.onclick = function (){
+
+            const carbs = document.createElement('p');
+            carbs.innerHTML = `Carbs: ${fruit.nutritions.carbohydrates}`
+            carbs.style.cssText = 
+                `color: black;`
+            box.appendChild(carbs);
+
+            const prot = document.createElement('p')
+            prot.innerHTML = `Protein: ${fruit.nutritions.protein}`
+            prot.style.cssText = 
+                `color: black;`
+            box.appendChild(prot);
+
+            const fat = document.createElement('p')
+            fat.innerHTML = `Fat: ${fruit.nutritions.fat}`
+            fat.style.cssText = 
+                `color: black;`
+            box.appendChild(fat);
+
+            const cal = document.createElement('p')
+            cal.innerHTML = `Calories: ${fruit.nutritions.calories}`
+            cal.style.cssText = 
+                `color: black;`
+            box.appendChild(cal);
+
+            const sugar = document.createElement('p')
+            sugar.innerHTML = `Sugar: ${fruit.nutritions.sugar}`
+            sugar.style.cssText = 
+                `color: black;`
+            box.appendChild(sugar);
+
+        };
+
+        box.appendChild(btn)
+    }
+})
+.catch (e => console.log(e))
