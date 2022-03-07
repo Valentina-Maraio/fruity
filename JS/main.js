@@ -1,3 +1,23 @@
+const searchBox = document.createElement('div');
+searchBox.style.cssText = 
+    `width: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: absolute;
+    
+    margin-bottom: 50px;`
+document.body.appendChild(searchBox)
+
+//searchbar
+searchBar = document.createElement('input');
+searchBar.id = "searchBar"
+searchBar.innerHTML = "Search..."
+searchBox.style.cssText = 
+        `color: black;`
+searchBox.appendChild(searchBar)
+
+
 //axios call
 axios({
     method: "GET",
@@ -5,6 +25,7 @@ axios({
 })
 .then(res => {
     const wrapper = document.createElement('div');
+    wrapper.id = "wrapper"
     wrapper.style.cssText = 
             `width: auto;
             display: flex;
@@ -12,29 +33,13 @@ axios({
             flex-wrap: wrap;`
     document.body.appendChild(wrapper)
 
-    const searchBox = document.createElement('div');
-    searchBox.style.cssText = 
-        `width: auto;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        position: absolute;
-        
-        margin-bottom: 50px;`
-    wrapper.appendChild(searchBox)
-
-    searchBar = document.createElement('input');
-    searchBar.innerHTML = "Search..."
-    searchBox.style.cssText = 
-            `color: black;`
-    searchBox.appendChild(searchBar)
-
     searchBtn = document.createElement('button');
     searchBtn.innerHTML = "GO"
     searchBox.appendChild(searchBtn)
 
     for (const fruit of res.data){
         const box = document.createElement('div');
+        box.id = `${fruit.name}`
         box.style.cssText =
             `color: black !important;
             background-color: lightgreen;
