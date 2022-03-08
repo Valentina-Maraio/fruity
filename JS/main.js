@@ -1,41 +1,45 @@
-const searchBox = document.createElement('div');
-searchBox.style.cssText = 
-    `width: auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: absolute;
-    
-    margin-bottom: 50px;`
-document.body.appendChild(searchBox)
-
-//searchbar
-searchBar = document.createElement('input');
-searchBar.id = "searchBar"
-searchBar.innerHTML = "Search..."
-searchBox.style.cssText = 
-        `color: black;`
-searchBox.appendChild(searchBar)
-
-
 //axios call
 axios({
     method: "GET",
     url: 'https://www.fruityvice.com/api/fruit/all'
 })
 .then(res => {
+    const searchBox = document.createElement('div');
+    searchBox.style.cssText = 
+        `width: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: absolute;
+        margin-bottom: 50px;`
+    document.body.appendChild(searchBox)
+
+    //searchbar
+    const searchBar = document.createElement('input');
+    searchBar.id = "searchBar"
+    searchBar.innerHTML = "Search..."
+    searchBox.style.cssText = 
+            `color: black;
+            display: flex;
+            justify-content: center;
+            padding: 30px;`
+    searchBox.appendChild(searchBar)
+
+    const searchBtn = document.createElement('button');
+    searchBtn.innerHTML = "GO"
+    searchBox.appendChild(searchBtn)
+    searchBtn.onclick = function(){
+        
+    }
+
     const wrapper = document.createElement('div');
     wrapper.id = "wrapper"
     wrapper.style.cssText = 
             `width: auto;
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             flex-wrap: wrap;`
     document.body.appendChild(wrapper)
-
-    searchBtn = document.createElement('button');
-    searchBtn.innerHTML = "GO"
-    searchBox.appendChild(searchBtn)
 
     for (const fruit of res.data){
         const box = document.createElement('div');
