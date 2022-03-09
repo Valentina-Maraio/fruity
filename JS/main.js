@@ -111,9 +111,7 @@ axios({
             sugar.style.cssText = 
                 `color: black;`
             box.appendChild(sugar);
-
         };
-
         box.appendChild(btn)
     }
 })
