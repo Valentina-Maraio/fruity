@@ -4,6 +4,7 @@ axios({
     url: 'https://www.fruityvice.com/api/fruit/all'
 })
 .then(res => {
+    //search BOX div
     const searchBox = document.createElement('div');
     searchBox.style.cssText = 
         `width: auto;
@@ -25,6 +26,7 @@ axios({
             padding: 30px;`
     searchBox.appendChild(searchBar)
 
+    //search Button
     const searchBtn = document.createElement('button');
     searchBtn.innerHTML = "GO"
     searchBox.appendChild(searchBtn)
