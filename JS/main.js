@@ -1,4 +1,4 @@
-//axios call
+//axios call    ORIGINALE
 axios({
     method: "GET",
     url: 'https://www.fruityvice.com/api/fruit/all'
@@ -19,25 +19,18 @@ axios({
     const searchBar = document.createElement('input');
     searchBar.id = "searchBar"
     searchBar.innerHTML = "Search..."
-    searchBox.style.cssText = 
+    searchBar.style.cssText = 
             `color: black;
             display: flex;
             justify-content: center;
-            padding: 30px;`
-    searchBox.appendChild(searchBar)
-
-    //search Button
-    const searchBtn = document.createElement('button');
-    searchBtn.innerHTML = "GO"
-    searchBox.appendChild(searchBtn)
-    searchBtn.onclick = function(){
-        
-    }
+            padding: 10px;`
+    searchBox.appendChild(searchBar);
 
     const wrapper = document.createElement('div');
     wrapper.id = "wrapper"
     wrapper.style.cssText = 
             `width: auto;
+            padding-top: 160px;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;`
