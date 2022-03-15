@@ -1,21 +1,23 @@
 //search BOX div
 const searchBox = document.createElement("div");
-searchBox.style.cssText = `width: auto;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        position: absolute;
-        margin-bottom: 50px;`;
+searchBox.style.cssText = 
+`width: auto;
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+position: absolute;
+margin-bottom: 50px;`;
 document.body.appendChild(searchBox);
 
 //searchbar
 const searchBar = document.createElement("input");
 searchBar.id = "searchBar";
 searchBar.innerHTML = "Search...";
-searchBar.style.cssText = `color: black;
-                display: flex;
-                justify-content: center;
-                padding: 10px;`;
+searchBar.style.cssText = 
+`color: black;
+display: flex;
+justify-content: center;
+padding: 10px;`
 searchBox.appendChild(searchBar);
 
 let fruits = [];
@@ -26,7 +28,7 @@ searchBar.addEventListener("keyup", (e) => {
   const input = e.target.value.toLowerCase();
 
   const fruitFilter = fruits.filter((fruit) => {
-    return fruit.name.toLowerCase().includes(input);
+    return fruit.name.toLowerCase().match(input);
   });
   showSearch(fruitFilter);
 });
