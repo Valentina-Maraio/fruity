@@ -4,6 +4,75 @@ axios({
     url: 'https://www.fruityvice.com/api/fruit/all'
 })
 .then(res => {
+     //search BOX div
+    const searchBox = document.createElement("div");
+    searchBox.style.cssText = 
+    `color: black !important;
+    background-color: lightgreen;
+    width: 400px;
+    height: 300px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    margin-top: 20px;`
+    document.body.appendChild(searchBox);
+
+    //searchbar
+    const searchBar = document.createElement("input");
+    searchBar.id = "searchBar";
+    searchBar.innerHTML = "Search...";
+    searchBar.style.cssText = 
+    `color: black;
+    display: flex;
+    width: 250px;
+    justify-content: center;`
+    searchBox.appendChild(searchBar);
+
+    let fruits = [];
+    const fruitInfo = document.createElement("fruitInfo");
+    searchBox.appendChild(fruitInfo);
+
+    searchBar.addEventListener("keyup", (e) => {
+    const input = e.target.value.toLowerCase();
+
+    const fruitFilter = fruits.filter((fruit) => {
+        return fruit.name.toLowerCase().match(input);
+    });
+    showSearch(fruitFilter);
+    });
+
+    const inputCall = async () => {
+    try {
+        const res = await fetch("https://www.fruityvice.com/api/fruit/all");
+        fruits = await res.json();
+    } catch (err) {
+        console.error(err);
+    }
+    };
+
+    const showSearch = function(fruits) {
+        let showResData = fruits.map((fruit) => {
+            return `
+            <div>
+                <h4>${fruit.name}</h4>
+                <h5>Family: ${fruit.family}</h5>
+                <p>Carbs: ${fruit.nutritions.carbohydrates}</p>
+                <p>Protein: ${fruit.nutritions.protein}</p>
+                <p>Fat: ${fruit.nutritions.fat}</p>
+                <p>Calories: ${fruit.nutritions.calories}</p>
+                <p>Sugar: ${fruit.nutritions.sugar}</p>
+            </div>
+        `;
+        })
+        .join('');
+        fruitInfo.innerHTML = showResData;
+    };
+
+    inputCall();
+
     const wrapper = document.createElement('div');
     wrapper.id = "wrapper"
     wrapper.style.cssText = 
@@ -87,73 +156,5 @@ axios({
         };
         box.appendChild(btn)
     }
-    //search BOX div
-   const searchBox = document.createElement("div");
-   searchBox.style.cssText = 
-   `color: black !important;
-   background-color: lightgreen;
-   width: 500px;
-   height: 300px;
-   text-align: center;
-   border-radius: 10px;
-   padding: 10px;
-   
-   justify-content: center
-   display: grid;
-   grid-gap: 2em;
-   margin: 10px;
-   border: 1px solid black;`
-   document.body.appendChild(searchBox);
-
-   //searchbar
-   const searchBar = document.createElement("input");
-   searchBar.id = "searchBar";
-   searchBar.innerHTML = "Search...";
-   searchBar.style.cssText = 
-   `color: black;
-   display: flex;
-   width: 250px;
-   justify-content: center;`
-   searchBox.appendChild(searchBar);
-
-   let fruits = [];
-   const fruitInfo = document.createElement("fruitInfo");
-   searchBox.appendChild(fruitInfo);
-
-   searchBar.addEventListener("keyup", (e) => {
-   const input = e.target.value.toLowerCase();
-
-   const fruitFilter = fruits.filter((fruit) => {
-       return fruit.name.toLowerCase().match(input);
-   });
-   showSearch(fruitFilter);
-   });
-
-   const inputCall = async () => {
-   try {
-       const res = await fetch("https://www.fruityvice.com/api/fruit/all");
-       fruits = await res.json();
-   } catch (err) {
-       console.error(err);
-   }
-   };
-
-   const showSearch = function(fruits) {
-       let showResData = fruits.map((fruit) => {
-           return `
-               <h4>${fruit.name}</h4>
-               <h5>Family: ${fruit.family}</h5>
-               <p>Carbs: ${fruit.nutritions.carbohydrates}</p>
-               <p>Protein: ${fruit.nutritions.protein}</p>
-               <p>Fat: ${fruit.nutritions.fat}</p>
-               <p>Calories: ${fruit.nutritions.calories}</p>
-               <p>Sugar: ${fruit.nutritions.sugar}</p>
-       `;
-       })
-       .join('');
-       fruitInfo.innerHTML = showResData;
-   };
-
-   inputCall();
 })
 .catch (e => console.log(e))
