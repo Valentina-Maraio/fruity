@@ -26,7 +26,7 @@ document.body.appendChild(fruitInfo);
 
 searchBar.addEventListener("keyup", (e) => {
   const input = e.target.value.toLowerCase();
-
+  
   const fruitFilter = fruits.filter((fruit) => {
     return fruit.name.toLowerCase().match(input);
   });
