@@ -4,7 +4,6 @@ axios({
     url: 'https://www.fruityvice.com/api/fruit/all'
 })
 .then(res => {
-
     const fruitBox = document.createElement('div'); //aqiBox
     fruitBox.style.cssText = 
     `background-color: lightgreen;
