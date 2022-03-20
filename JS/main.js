@@ -4,6 +4,117 @@ axios({
     url: 'https://www.fruityvice.com/api/fruit/all'
 })
 .then(res => {
+
+    const fruitBox = document.createElement('div'); //aqiBox
+    fruitBox.style.cssText = 
+    `background-color: lightgreen;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 370px;
+    margin: auto;
+    padding: 20px;
+    flex-wrap: wrap;`;
+    document.body.appendChild(fruitBox);
+
+    const fruitRes = document.createElement('div'); //aqiResult
+    fruitRes.style.cssText = 
+    `margin-bottom: 30px;`;
+    fruitBox.appendChild(fruitRes);
+
+    const fruitName = document.getElementById('fruitName'); //nameCity
+    fruitName.style.cssText = 
+    `font-size: 30px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 300;`;
+    fruitRes.appendChild(fruitName)
+
+    const fruitFamily = document.getElementById('fruitFamily'); //aqiCity
+    fruitFamily.style.cssText = 
+    `font-size: 20px;
+    line-height: 50px;
+    font-weight: 300;
+    text-align: center;`;
+    fruitRes.appendChild(fruitFamily);
+
+    //specifiche nutrizione
+    const carbs = document.createElement('p');
+    carbs.style.cssText = 
+        `color: black;`
+    fruitRes.appendChild(carbs);
+
+    const prot = document.createElement('p')
+    prot.style.cssText = 
+        `color: black;`
+    fruitRes.appendChild(prot);
+
+    const fat = document.createElement('p')
+    fat.style.cssText = 
+        `color: black;`
+    fruitRes.appendChild(fat);
+
+    const cal = document.createElement('p')
+    cal.style.cssText = 
+        `color: black;`
+    fruitRes.appendChild(cal);
+
+    const sugar = document.createElement('p')
+    sugar.style.cssText = 
+        `color: black;`
+    fruitRes.appendChild(sugar);
+
+    const fruitForm = document.createElement('form'); //aqiForm
+    fruitForm.style.cssText = 
+    ``;
+    fruitBox.appendChild(fruitForm);
+
+    fruitInput = document.getElementById('fruty'); //aqiInput
+    fruitInput.style.cssText = 
+    `border-radius: 30px;
+    border: solid 0px;
+    width: 100%; 
+    margin-bottom: 10px;
+    padding: 10px 0px;
+    text-align: center;
+    outline: none;`;
+    fruitBox.appendChild(fruitInput);
+
+    fruitBtn = document.createElement('button'); //button
+    fruitBtn.innerHTML = "GO";
+    fruitBtn.id = "fruitBtn"
+    fruitBtn.style.cssText = 
+    `border-radius: 30px;
+    width: 100%;
+    background-color: orange;
+    color: black;
+    border: none;
+    padding: 10px 0px;
+    cursor: pointer;
+    outline: none;`;
+    fruitBox.appendChild(fruitBtn);
+
+    function frutyFinder() {
+        let fruitAPI = `https://www.fruityvice.com/api/fruit/` + fruty.value;
+
+        axios(fruitAPI)
+        .then(res => {
+            fruitName.innerHTML = fruty.value;
+            fruitFamily.innerHTML = "Family: " + res.data.family;
+            carbs.innerHTML = "Carbs: " + res.data.nutritions.carbohydrates;
+            prot.innerHTML = "Protein: " + res.data.nutritions.protein;
+            fat.innerHTML = "Fat: " + res.data.nutritions.fat;
+            cal.innerHTML = "Calories: " + res.data.nutritions.calories;
+            sugar.innerHTML = "Sugar: " + res.data.nutritions.sugar;
+        })
+        .catch(e => alert("It does not exist"))
+    }
+
+    document.getElementById('fruitBtn').addEventListener("click", frutyFinder);
+
+
     const wrapper = document.createElement('div');
     wrapper.id = "wrapper"
     wrapper.style.cssText = 
@@ -11,77 +122,8 @@ axios({
             padding-top: 50px;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;`
+            flex-wrap: wrap;`;
     document.body.appendChild(wrapper)
-
-     //search BOX div
-     const searchBox = document.createElement("div");
-     searchBox.style.cssText = 
-     `color: black !important;
-     background-color: lightgreen;
-     width: 400px;
-     height: 300px;
-     text-align: center;
-     border-radius: 10px;
-     border: 1px solid black;
-     margin: auto;
-     width: 50%;
-     padding: 10px;
-     margin-top: 20px;`
-     document.body.appendChild(searchBox);
- 
-     //searchbar
-     const searchBar = document.createElement("input");
-     searchBar.id = "searchBar";
-     searchBar.innerHTML = "Search...";
-     searchBar.style.cssText = 
-     `color: black;
-     display: flex;
-     width: 250px;
-     justify-content: center;`
-     searchBox.appendChild(searchBar);
- 
-     let fruits = [];
-     const fruitInfo = document.createElement("fruitInfo");
-     searchBox.appendChild(fruitInfo);
- 
-     searchBar.addEventListener("keyup", (e) => {
-     const input = e.target.value.toLowerCase();
- 
-     const fruitFilter = fruits.filter((fruit) => {
-         return fruit.name.toLowerCase().match(input);
-     });
-     showSearch(fruitFilter);
-     });
- 
-     const inputCall = async () => {
-     try {
-         const res = await fetch("https://www.fruityvice.com/api/fruit/all");
-         fruits = await res.json();
-     } catch (err) {
-         console.error(err);
-     }
-     };
- 
-     const showSearch = function(fruits) {
-         let showResData = fruits.map((fruit) => {
-             return `
-             <div>
-                 <h4>${fruit.name}</h4>
-                 <h5>Family: ${fruit.family}</h5>
-                 <p>Carbs: ${fruit.nutritions.carbohydrates}</p>
-                 <p>Protein: ${fruit.nutritions.protein}</p>
-                 <p>Fat: ${fruit.nutritions.fat}</p>
-                 <p>Calories: ${fruit.nutritions.calories}</p>
-                 <p>Sugar: ${fruit.nutritions.sugar}</p>
-             </div>
-         `;
-         })
-         .join('');
-         fruitInfo.innerHTML = showResData;
-     };
- 
-     inputCall();
      
     for (const fruit of res.data){
         const box = document.createElement('div');
@@ -116,9 +158,14 @@ axios({
         const btn = document.createElement('button');
         btn.innerText = "INFO";
         btn.style.cssText = 
-            `background-color: orange;
-            width: 90px;
-            border-radius: 10px;`
+        `border-radius: 30px;
+        width: 100%;
+        background-color: orange;
+        color: black;
+        border: none;
+        padding: 5px 0px;
+        cursor: pointer;
+        outline: none;`;
         btn.value = "moreInfo"
         btn.id = "infoButton"
 
