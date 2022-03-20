@@ -1,10 +1,12 @@
+import _ from 'lodash';
+
 //axios call    ORIGINALE
 axios({
     method: "GET",
     url: 'https://www.fruityvice.com/api/fruit/all'
 })
 .then(res => {
-    const fruitBox = document.createElement('div'); //aqiBox
+    const fruitBox = document.createElement('div'); 
     fruitBox.style.cssText = 
     `background-color: lightgreen;
     border-radius: 30px;
@@ -18,12 +20,12 @@ axios({
     flex-wrap: wrap;`;
     document.body.appendChild(fruitBox);
 
-    const fruitRes = document.createElement('div'); //aqiResult
+    const fruitRes = document.createElement('div'); 
     fruitRes.style.cssText = 
     `margin-bottom: 30px;`;
     fruitBox.appendChild(fruitRes);
 
-    const fruitName = document.getElementById('fruitName'); //nameCity
+    const fruitName = document.getElementById('fruitName'); 
     fruitName.style.cssText = 
     `font-size: 30px;
     text-transform: uppercase;
@@ -31,7 +33,7 @@ axios({
     font-weight: 300;`;
     fruitRes.appendChild(fruitName)
 
-    const fruitFamily = document.getElementById('fruitFamily'); //aqiCity
+    const fruitFamily = document.getElementById('fruitFamily'); 
     fruitFamily.style.cssText = 
     `font-size: 20px;
     line-height: 50px;
@@ -65,12 +67,12 @@ axios({
         `color: black;`
     fruitRes.appendChild(sugar);
 
-    const fruitForm = document.createElement('form'); //aqiForm
+    const fruitForm = document.createElement('form'); 
     fruitForm.style.cssText = 
     ``;
     fruitBox.appendChild(fruitForm);
 
-    fruitInput = document.getElementById('fruty'); //aqiInput
+    fruitInput = document.getElementById('fruty'); 
     fruitInput.style.cssText = 
     `border-radius: 30px;
     border: solid 0px;
@@ -81,7 +83,7 @@ axios({
     outline: none;`;
     fruitBox.appendChild(fruitInput);
 
-    fruitBtn = document.createElement('button'); //button
+    fruitBtn = document.createElement('button'); 
     fruitBtn.innerHTML = "GO";
     fruitBtn.id = "fruitBtn"
     fruitBtn.style.cssText = 
